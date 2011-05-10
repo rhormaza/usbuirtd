@@ -5,7 +5,7 @@ achieve this. Browsing over internet, I found a python class that use the *.so
 provided for the manufacturer..So having that, in such a nice programming language
 give me the first push to start to write this.
 
-# Goals
+# Project Goals:
  - Have a full daemon, to listen for defined commands either tcp or udp connections.
  - Make the response as fast as possible. It is really annoying when you have a lag 
    here, just image I wanna send a command to my TV and that is achieve with a 500 ms
@@ -13,8 +13,11 @@ give me the first push to start to write this.
  - Make it multithread as sometimes I would like to send IR signals with delay, for example
    turn my TV on and then after 10 secs change to a predefined input.
 
-# TODO
+# TODO:
  - Write a parser to read from a defined config file
  - Implemented some mechanism of start/stop to send continuos commands. This is very
    useful when you are turning up or down volume, for instance. 
  - Clean the code as it is very messy (not an expert in python)
+
+# Acknowledge
+ - Ben Smith (benjamin.coder.smith@gmail.com) for usbuirt.py file
