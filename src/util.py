@@ -88,5 +88,6 @@ for i in REMOTE_NAMES:
 
 if __name__ == '__main__':
     #log.debug(REMOTE_NAMES[0])
+    print REMOTE['foxtel']
     for i in REMOTE:
         log.debug('--> ' +i)

@@ -6,7 +6,7 @@ INIT_DIR = /etc/init.d
 CONF_FILES = usbuirtd.conf remotes.conf
 INIT_SCRIPT = usbuirtd.sh
 DAEMON = usbuirtd.py
-OBJS = __init__.py daemon.py tcp_server.py usbuirt.py util.py uuirtdrv.so
+OBJS = __init__.py daemon.py tcp_server.py usbuirt.py util.py uuirtdrv.so $(DAEMON)
     
 install: ${OBJS} $(DAEMON)
 	install -d -m 0755 $(LIB_DIR)
@@ -17,9 +17,7 @@ install: ${OBJS} $(DAEMON)
 	install -m 0755 $(CONF_FILES) $(CONF_DIR)
 	install -m 0755 $(INIT_SCRIPT) $(INIT_DIR)	
 	
-	install -m 0755 $(DAEMON) $(BIN_DIR)
-
-.PHONY: install
+	ln -s $(LIB_DIR)/$(DAEMON) $(BIN_DIR)/$(DAEMON)
 
 deinstall: ${OBJS}
 	rm -rf $(LIB_DIR)
@@ -31,4 +29,15 @@ deinstall: ${OBJS}
 #	rm /var/run/usbuirtd.pid
 #	rm /var/log/usbuirtd.log
 
-.PHONY: deinstall
+reinstall :: deinstall
+	install -d -m 0755 $(LIB_DIR)
+	install -d -m 0755 $(CONF_DIR)
+	install -d -m 0755 $(INIT_DIR)
+	
+	install -m 0755 $(OBJS) $(LIB_DIR)
+	install -m 0755 $(CONF_FILES) $(CONF_DIR)
+	install -m 0755 $(INIT_SCRIPT) $(INIT_DIR)	
+	
+	ln -s $(LIB_DIR)/$(DAEMON) $(BIN_DIR)/$(DAEMON)
+
+.PHONY: install deinstall reinstall
