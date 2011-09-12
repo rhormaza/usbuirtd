@@ -12,12 +12,28 @@ import logging.handlers
 import configobj
 import validate
 
-ERROR_CODE = {
-              'MOVIE_NOT_FOUND': '1',
-              'CMD_NOT_IMPLEMENTED': '2',
-              'BAD_PARAM': '3',
-              'MUSIC_NOT_FOUND': '4',
-              }
+def load_conf(conf_file):
+    try:
+        config = configobj.ConfigObj(conf_file, configspec=spec)
+    except:
+        traceback.print_exc()
+        exit('Error parsing the ' + conf_file + ' please check it out.')
+    validator = validate.Validator()
+    if config.validate(validator) is not True:#), copy=True)
+        exit(CONF_FILE + ' file has problems...please check.')    
+    return config
+
+#Loading config files
+CONF_PREFIX = '/usr/local/etc/usbuirtd'
+CONF_FILE = CONF_PREFIX + '/usbuirtd.conf'
+REMOTE_CONF_FILE = CONF_PREFIX + '/remotes.conf'
+
+#ERROR_CODE = {
+#              'MOVIE_NOT_FOUND': '1',
+#              'CMD_NOT_IMPLEMENTED': '2',
+#              'BAD_PARAM': '3',
+#              'MUSIC_NOT_FOUND': '4',
+#              }
 
 default_config = """
 [CONF_VAR]
@@ -32,18 +48,8 @@ TCP_PORT = integer(min=1025, max=50000, default=8765)
 [INFOLABELS]
 """
 spec = default_config.split("\n")
-#Loadinf config files
-conf_filename = 'remotes.conf'
-try:
-    config = configobj.ConfigObj(conf_filename, configspec=spec)
-except:
-    traceback.print_exc()
-    exit('Error parsing the ' + conf_filename + ' please check it out.')
-validator = validate.Validator()
-if config.validate(validator) is not True:#), copy=True)
-    exit('Configuration file has problems...please check.')
 
-CONF_VAR = config['CONF_VAR']
+CONF_VAR = load_conf(CONF_FILE)['CONF_VAR']
 
 
 log = logging.getLogger(CONF_VAR['APP_NAME'])
@@ -65,8 +71,11 @@ ch.setFormatter(formatter)
 log.addHandler(fh)
 log.addHandler(ch)
 
+###################################
 #REMOTES section
+###################################
 REMOTE = {} #main dictionary
+config = load_conf(REMOTE_CONF_FILE)
 REMOTE_NAMES = config['REMOTES']['REMOTE_NAMES']
 for i in REMOTE_NAMES:
     try:

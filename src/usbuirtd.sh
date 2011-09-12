@@ -7,7 +7,7 @@
 # Get function from functions library
 #. /etc/init.d/functions
 
-DAEMON_PATH="/some/path/usbuirtd"
+DAEMON_PATH="/usr/local/bin"
 
 # Start
 start() {

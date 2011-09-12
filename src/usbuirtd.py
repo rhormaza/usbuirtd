@@ -4,22 +4,17 @@ Created on Apr 21, 2011
 @author: wired
 '''
 
-import sys, time
+import sys
+from util import CONF_VAR
 from daemon import Daemon
 from tcp_server import TCPServer
 
 class MyDaemon(Daemon):
     def run(self):
         TCPServer()
-#        while True:
-#            time.sleep(1)
-#            f = open('/dev/ttys001','w')
-#            f.write('running....\r\n')
-#            f.flush()
-#            f.close()
 
 if __name__ == "__main__":
-    daemon = MyDaemon('/tmp/daemon-example.pid')
+    daemon = MyDaemon(CONF_VAR['PID_FILE'])
     if len(sys.argv) == 2:
         if 'start' == sys.argv[1]:
             daemon.start()
