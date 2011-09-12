@@ -1,28 +1,28 @@
 #!/bin/bash
 #
 # chkconfig: 35 90 12
-# description: Foo server
+# description: usbuirtd server
 #
 
 # Get function from functions library
 #. /etc/init.d/functions
 
-# Start the service FOO
+DAEMON_PATH="/some/path/usbuirtd"
+
+# Start
 start() {
-        /home/xbmc/CoreData/UsbUIRT/usbuirtd.py start &
+        ${DAEMON_PATH}/usbuirtd.py start &
         ### Create the lock file ###
         touch /var/lock/subsys/usbuirtd
 }
 
-# Restart the service FOO
+# Stop
 stop() {
-        #killproc FOO
-        /home/xbmc/CoreData/UsbUIRT/usbuirtd.py
+        ${DAEMON_PATH}/usbuirtd.py stop
         ### Now, delete the lock file ###
         rm -f /var/lock/subsys/usbuirtd
 }
 
-### main logic ###
 case "$1" in
   start)
         start
@@ -31,9 +31,9 @@ case "$1" in
         stop
         ;;
   status)
-        #status FOO
+        #nothing yet
         ;;
-  restart|reload|condrestart)
+  restart|reload)
         stop
         start
         ;;

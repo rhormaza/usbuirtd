@@ -3,12 +3,14 @@ import ctypes
 import sys
 import getopt
 
+from util import CONF_VAR
+
 # Copyright 2010 Ben Smith (benjamin.coder.smith@gmail.com)
 # Used to access hardware features on the USB-UIRT device http://www.usbuirt.com
 # relies on the uuirtdrv.so library and USB-UIRT hardware device
 # Public Domain.
 
-DEFAULT_UUIRTDRV_LIBRARY_LOCATION = "/lib/uuirtdrv.so"
+DEFAULT_UUIRTDRV_LIBRARY_LOCATION = CONF_VAR['SO_FILE']
 
 PUUCALLBACKPROC = ctypes.CFUNCTYPE(None, ctypes.c_char_p, ctypes.c_void_p)
 PLEARNCALLBACKPROC = ctypes.CFUNCTYPE(None, ctypes.c_uint, ctypes.c_uint, ctypes.c_ulong,  ctypes.c_void_p)
