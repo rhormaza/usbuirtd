@@ -14,7 +14,7 @@ give me the first push to start to write this.
    turn my TV on and then after 10 secs change to a predefined input.
 
 # TODO:
- - Write a parser to read from a defined config file
+ - Implement distutils installation
  - Implemented some mechanism of start/stop to send continuos commands. This is very
    useful when you are turning up or down volume, for instance. 
  - Clean the code as it is very messy (not an expert in python)
