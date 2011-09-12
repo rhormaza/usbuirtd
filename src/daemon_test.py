@@ -11,12 +11,6 @@ from tcp_server import TCPServer
 class MyDaemon(Daemon):
     def run(self):
         TCPServer()
-#        while True:
-#            time.sleep(1)
-#            f = open('/dev/ttys001','w')
-#            f.write('running....\r\n')
-#            f.flush()
-#            f.close()
 
 if __name__ == "__main__":
     daemon = MyDaemon('/tmp/daemon-example.pid')
