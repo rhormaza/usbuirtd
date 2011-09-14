@@ -1,7 +1,7 @@
 BIN_DIR = /usr/local/bin
 LIB_DIR = /usr/local/lib/usbuirtd
 CONF_DIR = /usr/local/etc/usbuirtd
-INIT_DIR = /etc/init.d
+INIT_DIR = /etc/rc.d
 
 CONF_FILES = usbuirtd.conf remotes.conf
 INIT_SCRIPT = usbuirtd.sh

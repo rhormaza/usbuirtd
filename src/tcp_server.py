@@ -30,7 +30,7 @@ class AsynUsbUIRT(threading.Thread):
             self.usbuirt.open(util.CONF_VAR['DEV_FILE'])
             util.log.debug('device ' + util.CONF_VAR['DEV_FILE'] + ' succesfully opened!')
         except:
-            exit('device ' + util.CONF_VAR['DEV_FILE'] + ' has been found')
+            exit('device ' + util.CONF_VAR['DEV_FILE'] + ' has *NOT* been found')
 
     def sendIR(self, code):
         #Locking the device /dev/ttyUSBX
