@@ -8,19 +8,21 @@
 #. /etc/init.d/functions
 
 DAEMON_PATH="/usr/local/bin"
+PYTHON="/usr/bin/python2"
 
 # Start
 start() {
-        ${DAEMON_PATH}/usbuirtd.py start &
+        ${PYTHON} ${DAEMON_PATH}/usbuirtd.py start &
         ### Create the lock file ###
-        touch /var/lock/subsys/usbuirtd
+        touch /var/lock/usbuirtd
 }
+
 
 # Stop
 stop() {
-        ${DAEMON_PATH}/usbuirtd.py stop
+        ${PYTHON} ${DAEMON_PATH}/usbuirtd.py stop
         ### Now, delete the lock file ###
-        rm -f /var/lock/subsys/usbuirtd
+        rm -f /var/lock/usbuirtd
 }
 
 case "$1" in

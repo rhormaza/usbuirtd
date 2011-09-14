@@ -28,12 +28,6 @@ CONF_PREFIX = '/usr/local/etc/usbuirtd'
 CONF_FILE = CONF_PREFIX + '/usbuirtd.conf'
 REMOTE_CONF_FILE = CONF_PREFIX + '/remotes.conf'
 
-#ERROR_CODE = {
-#              'MOVIE_NOT_FOUND': '1',
-#              'CMD_NOT_IMPLEMENTED': '2',
-#              'BAD_PARAM': '3',
-#              'MUSIC_NOT_FOUND': '4',
-#              }
 
 default_config = """
 [CONF_VAR]
@@ -45,11 +39,14 @@ LOG_FILENAME = string(default='/tmp/usbuirtd.log')
 LOG_LEVEL = integer(default=10)
 TCP_CLIENT_LISTEN = integer(default=15)
 TCP_PORT = integer(min=1025, max=50000, default=8765)
-[INFOLABELS]
+
+[TV]
+POWER_DELAY = float(default=10.3)
 """
 spec = default_config.split("\n")
 
 CONF_VAR = load_conf(CONF_FILE)['CONF_VAR']
+TV_VAR = load_conf(CONF_FILE)['TV']
 
 
 log = logging.getLogger(CONF_VAR['APP_NAME'])
@@ -77,6 +74,12 @@ log.addHandler(ch)
 REMOTE = {} #main dictionary
 config = load_conf(REMOTE_CONF_FILE)
 REMOTE_NAMES = config['REMOTES']['REMOTE_NAMES']
+
+#When we add debug capabilities...this will be printed out
+if CONF_VAR['LOG_LEVEL'] == 10:
+            log.info('*********************************************************')
+            log.info('*                        NEW LOG                        *')
+            log.info('*********************************************************')
 for i in REMOTE_NAMES:
     try:
         REMOTE[i] =  config['REMOTES'][i]
