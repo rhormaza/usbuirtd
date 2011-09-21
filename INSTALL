@@ -1,0 +1,4 @@
+Version 0.1
+ - it requires at least python 2.6 as ctypes are used
+ - it needs configobj package, to install "pip install configobj"
+ - if pip is *not* installed, you have to do it by yourself
